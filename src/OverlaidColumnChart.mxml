@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+  <mx:Script>
+    <![CDATA[
+      import mx.collections.ArrayCollection;
+
+      [Bindable]
+      public var chartData:ArrayCollection;
+
+      [Bindable]
+      public var xField:String;
+
+      [Bindable]
+      public var yBtmSeries:String;
+
+      [Bindable]
+      public var yTopSeries:String;
+
+      [Bindable]
+      public var title:String;
+
+    ]]>
+  </mx:Script>
+
+  <mx:Style>
+    .title {
+      fontSize: 16;
+      font-weight: bold;
+      font-family: ArialEmbedded;
+      color: #333333;
+     }
+  </mx:Style>
+
+  <mx:CategoryAxis id="xAxis" dataProvider="{chartData}" categoryField="{xField}"/>
+  <mx:LinearAxis id="yAxis"/>
+  <mx:Stroke id="simpleStroke" color="#aaaaaa" weight="1"/>
+  <mx:SolidColor id="bottomSeries" color="#cccccc" alpha="0.8"/>
+  <mx:SolidColor id="topSeries" color="#333333" alpha="0.8"/>
+
+  <mx:Label text="{title}" left="0" top="0" styleName="title"/>
+  <mx:CartesianChart dataProvider="{chartData}" showDataTips="true" width="100%" height="100%" top="25">
+    <mx:seriesFilters>
+        <mx:Array/>
+    </mx:seriesFilters>
+
+    <mx:series>
+        <mx:ColumnSeries xField="{xField}" yField="{yBtmSeries}" displayName="{yBtmSeries}" fill="{bottomSeries}" columnWidthRatio="0.5"/>
+        <mx:ColumnSeries xField="{xField}" yField="{yTopSeries}" displayName="{yTopSeries}" fill="{topSeries}" columnWidthRatio="0.2"/>
+    </mx:series>
+
+    <mx:horizontalAxisRenderer>
+       <mx:AxisRenderer
+         axis="{xAxis}"
+         axisStroke="{simpleStroke}"
+         showLabels="true"
+         showLine="true"
+         fontSize="10"
+         fontFamily="ArialEmbedded"
+         fontAntiAliasType="advanced"
+         tickPlacement="outside"
+         tickStroke="{simpleStroke}"
+         tickLength="4"
+       />
+    </mx:horizontalAxisRenderer>
+
+    <mx:verticalAxisRenderer>
+       <mx:AxisRenderer
+         axis="{yAxis}"
+         showLabels="true"
+         showLine="false"
+         fontSize="10"
+         fontFamily="ArialEmbedded"
+         fontAntiAliasType="advanced"
+       />
+    </mx:verticalAxisRenderer>
+  </mx:CartesianChart>
+</mx:Canvas>

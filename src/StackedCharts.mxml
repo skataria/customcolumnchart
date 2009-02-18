@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" xmlns:chart="*">
+<mx:Script>
+  <![CDATA[
+    import mx.collections.ArrayCollection;
+    [Bindable]
+    public var dp:ArrayCollection = new ArrayCollection([
+                                                          {x:"Jan", cost:100, profit:20},
+                                                          {x:"Feb", cost:120, profit:130},
+                                                          {x:"March", cost:80, profit:70},
+                                                          {x:"April", cost:10, profit:5},
+                                                          {x:"May", cost:90, profit:70},
+                                                          {x:"June", cost:50, profit:80}]);
+  ]]>
+</mx:Script>
+
+ <!-- Use column chart as a separate component -->
+  <chart:OverlaidColumnChart
+   id="colChart"
+   x="10" y="10"
+   width="380"
+   height="300"
+   backgroundColor="#ffffff"
+   title="My Custom Title"
+   chartData="{dp}"
+   xField="x"
+   yBtmSeries="cost"
+   yTopSeries="profit"
+  />
+</mx:Application>
